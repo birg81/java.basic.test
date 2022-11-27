@@ -9,7 +9,7 @@ public class Stack<T> implements ADT {
 		MAX_SIZE = size;
 	}
 	public Stack() {
-		this(5);// Integer.MAX_VALUE);
+		this(5);	// Integer.MAX_VALUE);
 	}
 	@Override
 	public int size() {
@@ -24,28 +24,25 @@ public class Stack<T> implements ADT {
 		return n >= MAX_SIZE;
 	}
 	public boolean push(T elem) {
-		if (!isFull()) {
-			lst = new Node<>(elem, lst);
-			n++;
-			return true;
-		}
-		return false;
+		if (isFull())
+			return false;
+		lst = new Node<>(elem, lst);
+		n++;
+		return true;
 	}
 	public T pop() {
-		if (!isEmpty()) {
-			Node<T> node = lst;
-			lst = lst.getLnk();
-			node.setLink();
-			n--;
-			return node.getElem();
-		}
-		return null;
+		if (isEmpty())
+			return null;
+		Node<T> node = lst;
+		lst = lst.getLnk();
+		node.setLink();
+		n--;
+		return node.getElem();
 	}
 	@Override
 	public String toString() {
 		String s = "";
-		for (Node<T> node = lst; !isEmpty()
-				&& node != null; node = node.getLnk())
+		for (Node<T> node = lst; !isEmpty() && node != null; node = node.getLnk())
 			s += (!s.isBlank() ? ", " : "") + node.getElem().toString();
 		return "[%s]".formatted(!s.isBlank() ? s : "**VOID LIST**");
 	}
